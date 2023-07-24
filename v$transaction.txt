@@ -1,0 +1,14 @@
+
+----------------------------------------------------------------------  v$session 和 v$transaction 
+1，v$transaction中的SES_ADDR列，对应了v$session的SADDR列；
+2，v$session的taddr列，对应了v$transaction的addr列；
+
+select * from v$session t where t.SADDR in (select SES_ADDR from  v$transaction);
+select t.sid, t.SQL_ID, t.PREV_SQL_ID from v$session t where t.SADDR in (select SES_ADDR from  v$transaction);
+
+然后，可以查询该SQL的语句；
+
+在plsql developer 执行过sql后，总是通过v$session 和v$sql 连接总是找不到执行过的sql，就是这样的； 
+
+
+
